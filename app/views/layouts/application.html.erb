@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RubyGettingStarted</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script>
+$(document).ready(function(){
+        $.get("https://cdn.contentful.com/spaces/srih943s7prt/entries/2uqPbypicAoKeCi20UoM2O?access_token=8e99f3e47249d3cf172abba44ad78d06488a63381fd940de57b0b669abe08bd5", function(data, status){
+			var store=data.fields.firstcontent;           
+			$(".contentful").html(store);
+        });  
+});
+</script>
+
+  <title>Ruby Getting Started</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -10,5 +20,8 @@
 
 <%= yield %>
 
+ <div><h1>Below data is coming from contentful</h1></div>
+			
+ <div class="contentful"></div>
 </body>
 </html>

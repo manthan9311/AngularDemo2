@@ -1,27 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script>
-$(document).ready(function(){
-        $.get("https://cdn.contentful.com/spaces/srih943s7prt/entries/2uqPbypicAoKeCi20UoM2O?access_token=8e99f3e47249d3cf172abba44ad78d06488a63381fd940de57b0b669abe08bd5", function(data, status){
-			var store=data.fields.firstcontent;           
-			$(".contentful").html(store);
-        });  
-});
-</script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
-  <title>Ruby Getting Started</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
 <body>
+    <div ng-app="myApp" ng-controller="MyCtrl">
+        <address-form>
 
-<%= yield %>
+        </address-form>
+    </div>
 
- <div><h1>Below data is coming from contentful</h1></div>
-			
- <div class="contentful"></div>
+   
+    <script>
+        var myApp = angular.module('myApp', []);
+
+        myApp.directive('addressForm', function () {
+            return {
+
+                restrict: "EA",
+                template: '{{welcome}}<ul ng-repeat="item in menulist">    <li>        {{item}}    </li></ul>',
+                //templateUrl: 'partials/addressform.html',
+                link: function (scope, element, attrs) {
+                    scope.welcome = "Menu From Partial View";
+                    scope.menulist = ["Home", "About", "Contact"];
+                },
+                controller: function ($scope) { }// markup for template
+            };
+        });
+
+        angular.module('myApp').controller('MyCtrl', function ($scope) {
+
+        });
+    </script>
 </body>
 </html>
